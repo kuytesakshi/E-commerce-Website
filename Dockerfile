@@ -1,5 +1,5 @@
 # Stage 1: Build the frontend
-FROM node:14 as build-frontend
+FROM node:18 as build-frontend
 
 # Create and set the working directory
 WORKDIR /usr/src/app/frontend
@@ -17,7 +17,7 @@ COPY frontend/ .
 RUN npm run build
 
 # Stage 2: Build the backend
-FROM node:14
+FROM node:18
 
 # Create and set the working directory
 WORKDIR /usr/src/app/backend
@@ -30,6 +30,7 @@ RUN npm install
 
 # Copy the rest of the backend application code
 COPY backend/ .
+
 # Copy the built frontend files from the previous stage
 COPY --from=build-frontend /usr/src/app/frontend/build ./public
 
