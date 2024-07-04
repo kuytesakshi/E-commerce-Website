@@ -7,8 +7,8 @@ WORKDIR /usr/src/app/frontend
 # Copy package.json and package-lock.json
 COPY frontend/package*.json ./
 
-# Install dependencies
-RUN npm install
+# Clean npm cache and install dependencies
+RUN npm cache clean --force && npm install --verbose
 
 # Copy the rest of the frontend application code
 COPY frontend/ .
@@ -25,8 +25,8 @@ WORKDIR /usr/src/app/backend
 # Copy package.json and package-lock.json
 COPY backend/package*.json ./
 
-# Install dependencies
-RUN npm install
+# Clean npm cache and install dependencies
+RUN npm cache clean --force && npm install --verbose
 
 # Copy the rest of the backend application code
 COPY backend/ .
